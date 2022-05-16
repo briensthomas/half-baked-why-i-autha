@@ -8,7 +8,6 @@ export function getUser() {
     return client.auth.session() && client.auth.session().user;
 }
 
-
 export async function signupUser(email, password) {
     const response = await client.auth.signUp({ email, password });
     if (response.user) {
