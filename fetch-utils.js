@@ -8,6 +8,8 @@ export function getUser() {
     return client.auth.session() && client.auth.session().user;
 }
 
+
+
 export async function signupUser(email, password) {
     const response = await client.auth.signUp({ email, password});
     if (response.user) {
@@ -19,8 +21,15 @@ export async function signupUser(email, password) {
 
 export async function signInUser(email, password) {}
 
-export async function checkAuth() {}
+export function checkAuth() {
+    const user = getUser();
+
+    if (!user) location.replace('/');
+}
 
 export async function redirectIfLoggedIn() {}
 
-export async function logout() {}
+export async function logout() {
+    await client.auth.signOut();
+    return (location.replace('/'));
+}
